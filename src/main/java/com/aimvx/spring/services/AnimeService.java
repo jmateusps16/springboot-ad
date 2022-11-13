@@ -26,13 +26,13 @@ public class AnimeService {
 
 	public Anime findById(long id){
 		return animes.stream()
-				.filter(anime -> anime.getId().equals(id))
+				.filter(anime -> anime.getID().equals(id))
 				.findFirst()
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Anime not Found"));
 	}
 
     public Anime save(Anime anime) {
-		anime.setId(ThreadLocalRandom.current().nextLong(3, 1000000));
+		anime.setId(ThreadLocalRandom.current().nextLong(4, 1000));
 		animes.add(anime);
 		return anime;
     }
