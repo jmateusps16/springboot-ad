@@ -1,6 +1,8 @@
 package com.aimvx.spring.services;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -11,7 +13,12 @@ import com.aimvx.spring.domain.Anime;
 @Service
 public class AnimeService {
 
-	private List<Anime> animes = List.of(new Anime(1L, "DBZ"), new Anime(2L, "Berserk"), new Anime(3L, "Naruto"));
+	private static List<Anime> animes;
+	
+	static {
+		animes = new ArrayList<>(List.of(new Anime(1L, "DBZ"), new Anime(2L, "Berserk"), new Anime(3L, "Naruto")));
+	}
+
 
 	public List<Anime> listAll() {
 		return animes;
@@ -23,5 +30,11 @@ public class AnimeService {
 				.findFirst()
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Anime not Found"));
 	}
+
+    public Anime save(Anime anime) {
+		anime.setId(ThreadLocalRandom.current().nextLong(3, 1000000));
+		animes.add(anime);
+		return anime;
+    }
 
 }
