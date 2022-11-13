@@ -8,23 +8,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aimvx.spring.domain.Anime;
+import com.aimvx.spring.services.AnimeService;
 import com.aimvx.spring.util.DateUtil;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("anime")
+@RequestMapping("animes")
 @Slf4j
 @RequiredArgsConstructor
 public class AnimeController {
 	
 	private final DateUtil dateUtil;
+	private final AnimeService animeService;
 	
-	@GetMapping(path = "list")
+	@GetMapping
 	public List<Anime> list(){
 		log.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
-		return List.of(new Anime("DBZ"), new Anime("Berserk"), new Anime("Naruto"));
+		return animeService.listAll();
 		
 	}
 }
