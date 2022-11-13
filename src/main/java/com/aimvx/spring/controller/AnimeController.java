@@ -3,6 +3,7 @@ package com.aimvx.spring.controller;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,9 +25,9 @@ public class AnimeController {
 	private final AnimeService animeService;
 	
 	@GetMapping
-	public List<Anime> list(){
+	public ResponseEntity<List<Anime>> list(){
 		log.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
-		return animeService.listAll();
+		return ResponseEntity.ok(animeService.listAll());
 		
 	}
 }
