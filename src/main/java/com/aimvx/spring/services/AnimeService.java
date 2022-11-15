@@ -2,11 +2,10 @@ package com.aimvx.spring.services;
 
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import com.aimvx.spring.domain.Anime;
+import com.aimvx.spring.exception.BadRequestException;
 import com.aimvx.spring.mapper.AnimeMapper;
 import com.aimvx.spring.repository.AnimeRepository;
 import com.aimvx.spring.requests.AnimePostRequestBody;
@@ -30,7 +29,7 @@ public class AnimeService {
 
 	public Anime findByIdOrThrowBadRequestException(long id){
 		return animeRepository.findById(id)
-				.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Anime not Found"));
+				.orElseThrow(() -> new BadRequestException("Anime not Found"));
 	}
 
     public Anime save(AnimePostRequestBody animePostRequestBody) {
