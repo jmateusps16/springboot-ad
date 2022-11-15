@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aimvx.spring.domain.Anime;
+import com.aimvx.spring.requests.AnimePostRequestBody;
+import com.aimvx.spring.requests.AnimePutRequestBody;
 import com.aimvx.spring.services.AnimeService;
 import com.aimvx.spring.util.DateUtil;
 
@@ -38,12 +40,12 @@ public class AnimeController {
 
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<Anime> findById(@PathVariable long id) {
-		return ResponseEntity.ok(animeService.findById(id));
+		return ResponseEntity.ok(animeService.findByIdOrThrowBadRequestException(id));
 	}
 
 	@PostMapping
-	public ResponseEntity<Anime> save(@RequestBody Anime anime) {
-		return new ResponseEntity<>(animeService.save(anime), HttpStatus.CREATED);
+	public ResponseEntity<Anime> save(@RequestBody AnimePostRequestBody animePostRequestBody) {
+		return new ResponseEntity<>(animeService.save(animePostRequestBody), HttpStatus.CREATED);
 	}
 
 	@DeleteMapping(path = "/{id}")
@@ -53,8 +55,8 @@ public class AnimeController {
 	}
 
 	@PutMapping
-	public ResponseEntity<Void> replace(@RequestBody Anime anime){
-		animeService.replace(anime);
+	public ResponseEntity<Void> replace(@RequestBody AnimePutRequestBody animePutRequestBody){
+		animeService.replace(animePutRequestBody);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 

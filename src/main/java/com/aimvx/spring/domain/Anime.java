@@ -5,7 +5,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import lombok.Builder;
+
 @Entity
+@Builder
 public class Anime {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +19,7 @@ public class Anime {
 		this.id = id;
 	}
 
-	public Long getID(){
+	public Long getId(){
 		return id;
 	}
 
