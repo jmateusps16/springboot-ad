@@ -1,5 +1,8 @@
 package com.aimvx.spring.requests;
 
+import lombok.Data;
+
+@Data
 public class AnimePostRequestBody {
     private String name;
 
