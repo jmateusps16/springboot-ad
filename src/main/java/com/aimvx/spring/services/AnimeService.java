@@ -3,6 +3,7 @@ package com.aimvx.spring.services;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.aimvx.spring.domain.Anime;
 import com.aimvx.spring.exception.BadRequestException;
@@ -32,6 +33,7 @@ public class AnimeService {
 				.orElseThrow(() -> new BadRequestException("Anime not Found"));
 	}
 
+	@Transactional
     public Anime save(AnimePostRequestBody animePostRequestBody) {
 		return animeRepository.save(AnimeMapper.INSTANCE.toAnime(animePostRequestBody));
     }
